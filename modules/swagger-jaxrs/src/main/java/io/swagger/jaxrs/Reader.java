@@ -244,6 +244,17 @@ public class Reader {
                 if (ReflectionUtils.isOverriddenMethod(method, cls)) {
                     continue;
                 }
+                
+                if (getAnnotation(method, javax.ws.rs.GET.class) == null &&
+                    getAnnotation(method, javax.ws.rs.PUT.class) == null &&
+                    getAnnotation(method, javax.ws.rs.POST.class) == null &&
+                    getAnnotation(method, javax.ws.rs.DELETE.class) == null &&
+                    getAnnotation(method, javax.ws.rs.HEAD.class) == null &&
+                    getAnnotation(method, javax.ws.rs.OPTIONS.class) == null &&
+                    getAnnotation(method, javax.ws.rs.Path.class) == null) {
+                    continue;
+                }
+
                 javax.ws.rs.Path methodPath = getAnnotation(method, javax.ws.rs.Path.class);
 
                 String operationPath = getPath(apiPath, methodPath, parentPath);
